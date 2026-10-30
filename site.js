@@ -3,7 +3,7 @@
   const languageButton = document.querySelector('[data-action="language"]');
   const themeButton = document.querySelector('[data-action="theme"]');
   const savedTheme = localStorage.getItem('academic-theme');
-  const savedLanguage = localStorage.getItem('academic-language') || 'zh';
+  const savedLanguage = root.dataset.language || localStorage.getItem('academic-language') || 'zh';
 
   function applyTheme(theme) {
     root.dataset.theme = theme;
@@ -22,7 +22,7 @@
     if (languageButton) languageButton.textContent = language === 'en' ? '中文' : 'EN';
     const filter = document.querySelector('[data-course-filter]');
     if (filter) filter.placeholder = language === 'en' ? 'Date, topic or lecture' : '输入日期、主题或讲次';
-    localStorage.setItem('academic-language', language);
+    if (!root.dataset.language) localStorage.setItem('academic-language', language);
     applyTheme(root.dataset.theme || 'light');
   }
 
